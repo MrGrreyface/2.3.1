@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/resources/styles.css}">
+</head>
+<body>
+<div class="center">
+  <h2>Delete User</h2>
+  <p>Are you sure you want to delete user <strong th:text="${user.getFirstName() + ' ' + user.getLastName()}"></strong>?</p>
+  <form th:method="POST" th:action="@{/user/delete/{id}(id=${user.getId()})}">
+    <input type="submit" value="Delete" />
+  </form>
+  <a href="/user/list">Cancel</a>
+</div>
+</body>
+</html>

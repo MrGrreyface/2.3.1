@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/resources/styles.css}">
+  <title>User Manager</title>
+</head>
+<body>
+<div class="center">
+  <h2>List of users</h2>
+  <h3><a href="/spring_data_jpa_crud_app_war_exploded/user/new">New User</a></h3>
+  <table class="tg center">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Age</th>
+      <th>Edit/Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="user : ${users}">
+      <tr>
+        <td th:text="${user.getId()}">ID</td>
+        <td th:text="${user.getFirstName()}">First Name</td>
+        <td th:text="${user.getLastName()}">Last Name</td>
+        <td th:text="${user.getAge()}">Age</td>
+        <td class="tg-action">
+          <div>
+            <a class="link-button" th:href="@{/user/edit/{id}(id=${user.getId()})}">Edit</a>
+          </div>
+          <div>
+            <a class="link-button" th:href="@{/user/delete/{id}(id=${user.getId()})}">Delete</a>
+          </div>
+        </td>
+      </tr>
+    </th:block>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
