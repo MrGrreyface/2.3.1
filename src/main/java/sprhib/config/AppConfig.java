@@ -30,7 +30,7 @@ import java.util.Properties;
 @ComponentScan("sprhib")
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
-@EnableJpaRepositories("sprhib.repository")
+@EnableJpaRepositories("sprhib.dao")
 @EnableWebMvc
 public class AppConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
@@ -84,6 +84,7 @@ public class AppConfig implements WebMvcConfigurer {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
         properties.put("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
+        properties.put("hibernate.hbm2ddl.auto", env.getRequiredProperty("hibernate.hbm2ddl.auto"));
         return properties;
     }
 

@@ -1,10 +1,10 @@
-package sprhib.dao;
+package sprhib.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sprhib.dao.UserDao;
 import sprhib.model.User;
-import sprhib.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,38 +12,39 @@ import java.util.Optional;
 @Service
 @Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
-    private final UserRepository repository;
+    private final UserDao userDao;
 
 
     @Autowired
-    public UserServiceImpl(UserRepository repository) {
-        super();
-        this.repository = repository;
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
     }
-@Override
+    @Override
     public List<User> getAllUsers() {
-        return (List<User>) repository.findAll();
+        return userDao.getAllUsers();
     }
-@Override
-public User getUserById(Long id) {
-        Optional<User> foundPerson = repository.findById(id);
-        return foundPerson.orElse(null);
+    @Override
+    public User getUserById(Long id) {
+        return userDao.getUserById(id);
     }
 
     @Transactional
     @Override
     public void saveUser(User user) {
-        repository.save(user);
+        userDao.saveUser(user);
     }
 
     @Transactional
     public void update(long id, User user) {
-        user.setId(id);
-        repository.save(user);
+        User updatedUser = userDao.getUserById(id);
+        updatedUser.setFirstName(user.getFirstName());
+        updatedUser.setLastName(user.getLastName());
+        updatedUser.setAge(user.getAge());
+        userDao.update(updatedUser);
     }
 
     @Transactional
     public void deleteUserById(Long id) {
-        repository.deleteById(id);
+        userDao.deleteUserById(id);
     }
 }

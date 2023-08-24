@@ -1,4 +1,4 @@
-package sprhib.dao;
+package sprhib.service;
 
 import sprhib.model.User;
 

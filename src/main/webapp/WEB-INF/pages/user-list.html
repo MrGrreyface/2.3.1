@@ -8,7 +8,7 @@
 <body>
 <div class="center">
   <h2>List of users</h2>
-  <h3><a href="/spring_data_jpa_crud_app_war_exploded/user/new">New User</a></h3>
+  <h3><a  th:href="@{/new}">New User</a></h3>
   <table class="tg center">
     <thead>
     <tr>
@@ -28,10 +28,10 @@
         <td th:text="${user.getAge()}">Age</td>
         <td class="tg-action">
           <div>
-            <a class="link-button" th:href="@{/user/edit/{id}(id=${user.getId()})}">Edit</a>
+            <a class="link-button" th:href="@{/edit/{id}(id=${user.getId()})}">Edit</a>
           </div>
           <div>
-            <a class="link-button" th:href="@{/user/delete/{id}(id=${user.getId()})}">Delete</a>
+            <a class="link-button" th:href="@{/delete/{id}(id=${user.getId()})}">Delete</a>
           </div>
         </td>
       </tr>
